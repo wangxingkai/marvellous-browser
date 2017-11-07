@@ -4,6 +4,7 @@ import {client} from '../../client'
 import * as R from 'ramda'
 import {browserHistory} from 'react-router'
 import {objectToQueryParams} from '../../helpers/objectToQueryParams'
+import { CREATORS_QUERY } from './queries'
 let {expect, describe, it, spyOn} = global
 
 describe('Creators actions', () => {
@@ -28,7 +29,7 @@ describe('Creators actions', () => {
     const expectedAction = {
       type: constants.CREATORS_LOAD,
       payload: client.query({
-        query: actions.CREATORS_QUERY,
+        query: CREATORS_QUERY,
         variables: queryOptions
       })
     }
@@ -46,7 +47,7 @@ describe('Creators actions', () => {
     const expectedAction = {
       type: constants.CREATORS_LOAD_MORE,
       payload: client.query({
-        query: actions.CREATORS_QUERY,
+        query: CREATORS_QUERY,
         variables: queryOptions
       })
     }
@@ -76,7 +77,7 @@ describe('Creators actions', () => {
       {
         type: constants.CREATORS_LOAD,
         payload: client.query({
-          query: actions.CREATORS_QUERY,
+          query: CREATORS_QUERY,
           variables: mergedVariables
         })
       }
