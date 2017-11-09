@@ -5,6 +5,7 @@ import {comics} from './components/comics/reducers'
 import {creators} from './components/creators/reducers'
 import {characters} from './components/characters/reducers'
 import {toolbar} from './components/toolbar/reducers'
+import {login} from './components/login/reducers'
 import thunkMiddleware from 'redux-thunk'
 import promiseMiddleware from 'redux-promise-middleware'
 import multi from 'redux-multi'
@@ -29,7 +30,8 @@ export const store = createStore(
     comics: comics,
     creators: creators,
     characters: characters,
-    toolbar: toolbar
+    toolbar: toolbar,
+    login,
   }),
   {},
   compose(

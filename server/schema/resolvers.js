@@ -10,7 +10,7 @@ import R from 'ramda'
 export const resolvers = {
   Query: {
     creator(
-      obj,
+      obj, 
       {id}
     ) {
       return creatorDetailLoader.load(id)
@@ -39,7 +39,7 @@ export const resolvers = {
     },
 
     comic(
-      obj,
+      obj, 
       {id}
     ) {
       return comicDetailLoader.load(id)
@@ -73,7 +73,7 @@ export const resolvers = {
     },
 
     character(
-      obj,
+      obj, 
       {id}
     ) {
       return characterDetailLoader.load(id)
@@ -99,6 +99,28 @@ export const resolvers = {
       }
 
       return charactersLoader.load(JSON.stringify(keys))
-    }
+    },
+
+    login: (
+      _,
+      { credential },
+      { userStore }
+    ) => ({
+      email: userStore.login(credential)
+    }),
+    isEmailRegistered: (
+      _,
+      { email },
+      { userStore }
+    ) => ({
+      isUserExist: userStore.isUserExist(email)
+    })
+  },
+  Mutation: {
+    createUser: (
+      _,
+      { credential },
+      { userStore }
+    ) => userStore.register(credential)
   }
-}
+};

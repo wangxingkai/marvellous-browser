@@ -43,7 +43,29 @@ type Creator {
   comics: [Comic]
 }
 
+# a user
+type User{
+  email:String
+}
+
+# login payload
+input UserCredentialInput{
+  email:String!
+  password:String!
+}
+
+# indicate if the user already exists
+type EmailAvalibilityCheckResult{
+  isUserExist:Boolean
+}
+
 type Query {
+  # login a user with credential
+  login(credential:UserCredentialInput!):User
+  
+  # check if an user exists
+  isEmailRegistered(email:String!):EmailAvalibilityCheckResult
+
   comic(id: Int!): Comic
   comics(
     start: Int = 0, 
@@ -69,4 +91,10 @@ type Query {
     nameStartsWith: String
   ): [Creator]
 }
+
+type Mutation{
+  # create a user with given credential. error when create failed.
+  createUser(credential:UserCredentialInput!):User
+}
+
 `

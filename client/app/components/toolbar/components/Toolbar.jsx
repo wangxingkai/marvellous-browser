@@ -13,6 +13,7 @@ import {CreatorSearch} from './CreatorSearch/CreatorSearch'
 import {CharacterControls} from './CharactersSearch/CharacterControls'
 import {CharacterSearch} from './CharactersSearch/CharacterSearch'
 import {DetailBack} from './DetailBack'
+import UserWidget from '../../login/components/UserWidget';
 
 const getPathname = pathOr('', ['routing', 'locationBeforeTransitions', 'pathname'])
 const isOnDetailsPage = () => {
@@ -30,7 +31,7 @@ function Toolbar(props) {
     toolbar: {
       show,
       showSearch
-    }
+    },
   } = props
 
   const pathname = getPathname(props)
@@ -88,7 +89,9 @@ function Toolbar(props) {
             Characters
           </Link>
         </div>
-
+        <div>
+          <UserWidget />
+        </div>
         {showComicControls && <ComicControls comics={comics}
                                              dispatch={dispatch}/>}
         {showCreatorControls && <CreatorControls creators={creators}
@@ -121,6 +124,7 @@ export default connect((state) => {
     comics: state.comics,
     creators: state.creators,
     characters: state.characters,
-    toolbar: state.toolbar
+    toolbar: state.toolbar,
+    login:state.login
   }
 })(Toolbar)
