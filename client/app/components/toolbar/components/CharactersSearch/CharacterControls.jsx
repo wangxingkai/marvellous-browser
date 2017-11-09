@@ -6,8 +6,6 @@ import pathOr from 'ramda/src/pathOr'
 import compose from 'ramda/src/compose'
 import {
   CHARACTERS_LOAD_MORE_LIMIT,
-  CHARACTERS_ORDER_ISSUE_NUMBER_DESC,
-  CHARACTERS_ORDER_ON_SALE_DATE_DESC,
   CHARACTERS_ORDER_NAME_ASC
 } from '../../../characters/constants'
 import { toggleToolbarSearch } from '../../actions'
