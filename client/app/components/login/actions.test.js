@@ -1,13 +1,13 @@
 import { loginActionCurry } from './actions'
 const { expect, describe, it } = global
 
-describe('actions', async () => {
+describe('actions', (async () => {
   it('should create a user when user does not exist, also login that user when it exist', () => {
     const credential = {
       email: 'foo@bar.quark',
       password: 'secret'
     }
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
     const stubQuery = jest
       .fn()
       .mockReturnValueOnce(
@@ -30,8 +30,8 @@ describe('actions', async () => {
           })
         )
       )
-      
-    // eslint-disable-next-line 
+
+    // eslint-disable-next-line
     const stubMutate = jest.fn().mockReturnValue(
       new Promise(resolve =>
         resolve({
@@ -48,12 +48,14 @@ describe('actions', async () => {
       stubMutate
     )
 
-    expect(
-      sut(credential).payload
-    ).resolves.toEqual({
-      data: {
-        createUser: { email: 'foo@bar.quark' }
-      }
+    sut(credential).payload.then((response) => {
+      expect(
+        response.payload
+      ).toEqual({
+        data: {
+          createUser: { email: 'foo@bar.quark' }
+        }
+      })
     })
   })
-})
+}))
