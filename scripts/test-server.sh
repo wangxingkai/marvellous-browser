@@ -11,5 +11,5 @@ node_modules/.bin/lab -T node_modules/lab-babel \
     -t 50 \
     -S \
     --timeout 20000 \
-    --ignore '__core-js_shared__,core,System,asap,Observable,regeneratorRuntime,_babelPolyfill,WebAssembly'
+    --ignore '__core-js_shared__,core,System,asap,Observable,regeneratorRuntime,_babelPolyfill,WebAssembly,SharedArrayBuffer,Atomics'
 
