@@ -69,7 +69,7 @@
     "testPathIgnorePatterns": [
       "/node_modules/"
     ],
-    "collectCoverage": true,
+    "collectCoverage": false,
     "coverageThreshold": {
       "global": {
         "branches": 50,
