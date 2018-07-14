@@ -24,10 +24,10 @@ function CreatorsTile(props) {
   })
 
   return (
-    <Link to={`/creators/${creator.id}`}
-          className={comicClass}
-          style={styleForCreator(creator)}>
-      <img src={creator.thumbnail}/>
+    <Link to={`/creators/${creator.id}`} className={comicClass}>
+      <div className="creator-tile__image" style={styleForCreator(creator)}>
+        {creator.hasImages && <img src={creator.thumbnail}/>}
+      </div>
       <div className="creator-tile__detail">
         <h3>{creator.suffix && `(${creator.suffix})`} {creator.fullName}</h3>
       </div>

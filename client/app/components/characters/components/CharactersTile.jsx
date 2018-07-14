@@ -15,17 +15,17 @@ const styleForCharacter = ifElse(
 
 export default function CharacterTile(props) {
   const character = props.character
-  
+
   const characterClass = classNames({
     'character-tile': true,
     'character-tile--no-images': !character.hasImages
   })
 
   return (
-    <Link to={`/characters/${character.id}`}
-          className={characterClass}
-          style={styleForCharacter(character)}>
-      {character.hasImages && <img src={character.thumbnail}/>}
+    <Link to={`/characters/${character.id}`} className={characterClass}>
+      <div className="character-tile__image" style={styleForCharacter(character)}>
+        {character.hasImages && <img src={character.thumbnail}/>}
+      </div>
       <div className="character-tile__detail">
         <h3>{character.name}</h3>
       </div>
