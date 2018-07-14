@@ -1,6 +1,6 @@
 import React from 'react'
 import './ComicControls.pcss'
-import { updateComicsQuery } from '../../comics/actions'
+import { updateComicsQuery } from '../../../comics/actions'
 import path from 'ramda/src/path'
 import compose from 'ramda/src/compose'
 import {
@@ -8,8 +8,8 @@ import {
   COMICS_ORDER_ISSUE_NUMBER_DESC,
   COMICS_ORDER_ON_SALE_DATE_DESC,
   COMICS_ORDER_TITLE_ASC
-} from '../../comics/constants'
-import { toggleToolbarSearch } from '../actions'
+} from '../../../comics/constants'
+import { toggleToolbarSearch } from '../../actions'
 
 const getTitleStartsWith = path(['comics', 'titleStartsWith'])
 const getCharacterIds = path(['comics', 'characterIds'])

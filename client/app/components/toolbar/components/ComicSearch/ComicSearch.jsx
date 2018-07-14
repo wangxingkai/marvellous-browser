@@ -5,7 +5,7 @@ import {
   addComicSearchCharacterSuggestion, deleteComicSearchCharacterSuggestion, fetchComicSearchCharacterSuggestions,
   updateComicsQuery,
   updateTitleStartsWith
-} from '../../comics/actions'
+} from '../../../comics/actions'
 import ReactTags from 'react-tag-autocomplete'
 
 export function ComicSearch(props) {

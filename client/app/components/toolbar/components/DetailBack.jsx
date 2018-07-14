@@ -1,6 +1,6 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
-import './ComicDetailBack.pcss'
+import './DetailBack.pcss'
 import ifElse from 'ramda/src/ifElse'
 import isNil from 'ramda/src/isNil'
 import split from 'ramda/src/split'
@@ -18,7 +18,7 @@ const goBackOrToSubjectRoot = ifElse(
 
 export function DetailBack () {
   return (
-    <a className="comic__back-button"
+    <a className="detail__back-button"
        onClick={() => goBackOrToSubjectRoot(browserHistory.getCurrentLocation().key)}>
       <i className="icon-left"/>
     </a>
