@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import './CreatorSearch.pcss'
+import '../SearchSearch.pcss'
 import {
   updateCreatorsQuery,
   updateNameStartsWith
@@ -17,8 +17,8 @@ export function CreatorSearch(props) {
   } = props
 
   const searchClass = classNames({
-    'creator__search': true,
-    'creator__search--show': showSearch
+    'search__search': true,
+    'search__search--show': showSearch
   })
 
   return (
@@ -30,13 +30,13 @@ export function CreatorSearch(props) {
           orderBy
         }))
       }}>
-        <div className="creator__search__inputs">
+        <div className="search__search__inputs">
           <input onChange={(event) => dispatch(updateNameStartsWith(event.target.value))}
                  value={nameStartsWith || ''}
                  placeholder="Names that containing"
-                 className="creator__search__inputs__input"/>
+                 className="search__search__inputs__input"/>
         </div>
-        <button className="creator__search__button">
+        <button className="search__search__button">
           Go
         </button>
       </form>

@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import './CharacterSearch.pcss'
+import '../SearchSearch.pcss'
 import {
   updateCharactersQuery,
   updateNameStartsWith
@@ -17,8 +17,8 @@ export function CharacterSearch(props) {
   } = props
 
   const searchClass = classNames({
-    'character__search': true,
-    'character__search--show': showSearch
+    'search__search': true,
+    'search__search--show': showSearch
   })
 
   return (
@@ -30,13 +30,13 @@ export function CharacterSearch(props) {
           orderBy
         }))
       }}>
-        <div className="character__search__inputs">
+        <div className="search__search__inputs">
           <input onChange={(event) => dispatch(updateNameStartsWith(event.target.value))}
                  value={nameStartsWith || ''}
                  placeholder="Names that containing"
-                 className="character__search__inputs__input"/>
+                 className="search__search__inputs__input"/>
         </div>
-        <button className="character__search__button">
+        <button className="search__search__button">
           Go
         </button>
       </form>

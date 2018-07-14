@@ -1,3 +1,29 @@
+@import '../../../styles/variables.pcss';
+@import '../../../styles/typography.pcss';
+
 .UserWidget {
-  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: var(--colour-white);
+  height: 50px;
+
+  &__link {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: var(--colour-blue);
+    font-size: 35px;
+    font-weight: bold;
+    font-family: var(--font-family-heading);
+  }
+
+  @media (--landscape-tablets) {
+    flex-direction: row;
+
+    &__link {
+      width: auto;
+      padding: 0 28px;
+    }
+  }
 }

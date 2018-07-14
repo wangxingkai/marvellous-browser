@@ -1,0 +1,46 @@
+@import '../../../styles/variables.pcss';
+
+.search__search {
+  padding: 10px;
+
+  form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__inputs {
+    width: 80%;
+
+    &__input {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      margin-top: 10px;
+      border: none;
+      text-indent: 5px;
+      font-family: inherit;
+      border-radius: 0;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: 20%;
+    margin-left: 10px;
+    align-self: stretch;
+    text-transform: uppercase;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

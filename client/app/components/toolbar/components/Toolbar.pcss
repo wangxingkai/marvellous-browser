@@ -3,58 +3,55 @@
 
 .toolbar {
   position: fixed;
-  background-color: var(--colour-black);
   z-index: 9000;
   width: 100%;
-  transition:
-    bottom 0.25s ease-in-out,
-    height 0.25s ease-in-out;
-  height: var(--toolbar-height-device);
-  bottom: var(--toolbar-bottom-device);
+  bottom: 0;
 
-  @media (--portrait-tablets) {
-    height: var(--toolbar-height-large);
-    bottom: var(--toolbar-bottom-large);
+  &--active &__wrapper {
+    transform: translateY(0);
   }
 
-  &--active {
-    bottom: 0;
-  }
-
-  &--active-search {
-    height: var(--toolbar-height-with-search-device);
-
-    @media (--portrait-tablets) {
-      height: var(--toolbar-height-large);
-    }
+  &__wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    transition: transform 0.25s ease-in-out;
+    transform: translateY(100%);
   }
 
   &__top {
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     width: 100%;
     height: 100%;
+    background-color: var(--colour-black);
+    z-index: 9400;
+
+    @media (--desktop) {
+      flex-direction: row;
+    }
 
     &__links {
-      display: none;
+      display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      margin-left: 20px;
-      justify-content: center;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 15px 0;
 
-      @media (--small-phones) {
-        display: none;
-      }
-
-      @media (--portrait-tablets) {
-        display: flex;
+      @media (--desktop) {
+        flex-direction: row;
+        padding: 0;
       }
 
       a {
+        padding: 0 28px;
         color: var(--colour-blue);
-        font-size: 16px;
+        font-size: 35px;
         font-weight: bold;
-        margin-right: 10px;
+        font-family: var(--font-family-heading);
+
+        &:link {
+          color: var(--colour-blue);
+        }
 
         &.toolbar__top__links--active {
           color: var(--colour-white);
@@ -69,8 +66,8 @@
   }
 
   .logo {
-    align-self: flex-start;
-    padding: 5px;
+    align-self: center;
+    padding: 8px;
     color: var(--colour-white);
     text-align: center;
 
@@ -80,13 +77,11 @@
     }
 
     @media (--portrait-tablets) {
-      margin-left: 100px;
-    }
-
-    @media (--landscape-tablets) {
       flex-direction: row;
       align-self: center;
       justify-content: center;
+      margin-top: 13px;
+      margin-bottom: 13px;
 
       a {
         flex-direction: row;
@@ -94,8 +89,12 @@
       }
     }
 
+    @media (--desktop) {
+      margin-left: 96px;
+    }
+
     &__marvel,
-    &__browser {
+    &__eighties {
       display: inline-flex;
     }
 
@@ -110,13 +109,15 @@
     }
 
     &__eighties {
+      margin-top: 1px;
       line-height: 100%;
       font-size: 25px;
       font-family: var(--font-family-subheading);
       color: var(--colour-highlight);
 
-      @media (--landscape-tablets) {
+      @media (--portrait-tablets) {
         margin-left: 10px;
+        margin-top: 0;
       }
     }
   }
@@ -135,10 +136,11 @@
     border-radius: none;
     border: none;
     cursor: pointer;
-    transition: background 0.3s;
-    position: fixed;
+    transition: background 0.3s ease-in-out;
+    position: absolute;
     bottom: 0;
     background-color: var(--colour-black);
+    z-index: 9500;
 
     &:focus {
       outline: none;
@@ -152,7 +154,7 @@
       right: 18px;
       height: 10px;
       background: var(--colour-white);
-      transition: background 0.3s, 0s;
+      transition: background 0.3s, 0s ease-in-out;
     }
 
     span::before,
@@ -166,6 +168,7 @@
       content: '';
       transition-duration: 0.3s, 0.3s;
       transition-delay: 0s, 0.3s;
+      transition-timing-function: ease-in-out, ease-in-out;
     }
 
     span::before {
@@ -204,27 +207,15 @@
 }
 
 .toolbar__bottom {
-  position: relative;
-  opacity: 0;
-  pointer-events: none;
-  height: var(--toolbar-search-height);
-  transition: opacity 0.25s ease-in-out;
-  bottom: calc(var(--toolbar-height-device) + 50px);
   width: 100%;
   background-color: var(--colour-black);
-
-  @media (--portrait-tablets) {
-    height: calc(var(--toolbar-search-height) - 70px);
-    padding-top: 5px;
-    position: relative;
-    bottom: 170px;
-    width: 50%;
-    float: right;
-  }
+  overflow: hidden;
+  z-index: 9300;
+  transition: transform 0.25s ease-in-out;
+  transform: translateY(100%);
 
   &--is-active {
-    opacity: 1;
-    pointer-events: all;
+    transform: translateY(0);
   }
 }
 

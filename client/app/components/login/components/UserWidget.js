@@ -12,25 +12,21 @@ class User extends React.PureComponent {
       dispatch
     } = this.props
 
-    return (
+    return (user.email ?
       <div className="UserWidget">
-        {user.email ? (
-          <div>
-            Goodday! {user.email}
-            <br />
-            <button
-              onClick={evt => {
-                evt.preventDefault()
-                dispatch(logoutAction())
-              }}
-            >
-              Logout
-            </button>
-          </div>
-        ) : (
-          <Link to="login">Login</Link>
-        )}
+        Goodday! {user.email}
+        <br />
+        <button
+          onClick={evt => {
+            evt.preventDefault()
+            dispatch(logoutAction())
+          }}
+        >
+          Logout
+        </button>
       </div>
+      :
+      <Link to="/login" activeClassName="toolbar__top__links--active">Login</Link>
     )
   }
 }

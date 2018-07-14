@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import '../SearchSearch.pcss'
 import './ComicSearch.pcss'
 import {
   addComicSearchCharacterSuggestion, deleteComicSearchCharacterSuggestion, fetchComicSearchCharacterSuggestions,
@@ -22,7 +23,8 @@ export function ComicSearch(props) {
 
   const searchClass = classNames({
     'comic__search': true,
-    'comic__search--show': showSearch
+    'search__search': true,
+    'search__search--show': showSearch
   })
 
   return (
@@ -35,21 +37,23 @@ export function ComicSearch(props) {
           characterIds
         }))
       }}>
-        <div className="comic__search__inputs">
+        <div className="search__search__inputs">
           <ReactTags placeholder="Including which character"
+                     autoresize={false}
+                     autofocus={false}
+                     maxSuggestionsLength={5}
                      tags={characterIds}
                      suggestions={characterSuggestions}
                      handleDelete={(index) => dispatch(deleteComicSearchCharacterSuggestion(index, {characterIds}))}
                      handleAddition={(tag) => dispatch(addComicSearchCharacterSuggestion(tag, {characterIds}))}
                      handleInputChange={(input) => dispatch(fetchComicSearchCharacterSuggestions(input))}
-                     className="comic__search__inputs__input"
           />
           <input onChange={(event) => dispatch(updateTitleStartsWith(event.target.value))}
                  value={titleStartsWith || ''}
                  placeholder="Titles that start with"
-                 className="comic__search__inputs__input"/>
+                 className="search__search__inputs__input"/>
         </div>
-        <button className="comic__search__button">
+        <button className="search__search__button">
           Go
         </button>
       </form>

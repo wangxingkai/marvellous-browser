@@ -1,5 +1,5 @@
 import React from 'react'
-import './ComicControls.pcss'
+import '../SearchControls.pcss'
 import { updateComicsQuery } from '../../../comics/actions'
 import path from 'ramda/src/path'
 import compose from 'ramda/src/compose'
@@ -35,8 +35,8 @@ export function ComicControls (props) {
   } = props
 
   return (
-    <div className="comic__controls">
-      <div className="comic__controls__sorting">
+    <div className="search__controls">
+      <div className="search__controls__sorting">
         <label>
           Title
           <input type="radio"
@@ -63,7 +63,7 @@ export function ComicControls (props) {
         </label>
       </div>
 
-      <button className="comic__controls__search"
+      <button className="search__controls__search"
               onClick={() => props.dispatch(toggleToolbarSearch())}>
         <i className="icon-search"/>
       </button>

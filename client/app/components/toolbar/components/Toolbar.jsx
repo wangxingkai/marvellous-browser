@@ -56,63 +56,66 @@ function Toolbar(props) {
     'toolbar__bottom--is-active': show && showSearch && (showComicControls || showCreatorControls || showCharacterControls)
   })
 
-  // Show the back button iff on a detail page
+  // Show the back button if on a detail page
   const showDetailsBackButton = isOnDetailsPage()
 
   return (
     <div className={toolbarClass}>
-      <div className="toolbar__top">
-        <button className={toolbarToggleClass}
-                onClick={() => dispatch(toggleToolbar())}>
-          <span>Toggle menu</span>
-        </button>
+      <button className={toolbarToggleClass}
+              onClick={() => dispatch(toggleToolbar())}>
+        <span>Toggle menu</span>
+      </button>
+      <div className="toolbar__wrapper">
+        <div className="toolbar__top">
+          <h1 className="logo">
+            <Link to="/"
+                  onClick={() => dispatch(toggleToolbar())}>
+              <span className="logo__marvel">Marvellous</span>
+              <span className="logo__eighties">Browser</span>
+            </Link>
+          </h1>
 
-        <h1 className="logo">
-          <Link to="/"
-                onClick={() => dispatch(toggleToolbar())}>
-            <span className="logo__marvel">Marvellous</span>
-            <span className="logo__eighties">Browser</span>
-          </Link>
-        </h1>
+          <div className="toolbar__top__links"
+                  onClick={() => dispatch(toggleToolbar())}>
+            <Link to="/comics"
+                  activeClassName="toolbar__top__links--active">
+              Comics
+            </Link>
+            <Link to="/creators"
+                  activeClassName="toolbar__top__links--active">
+              Creators
+            </Link>
+            <Link to="/characters"
+                  activeClassName="toolbar__top__links--active">
+              Characters
+            </Link>
+            <UserWidget />
+          </div>
 
-        <div className="toolbar__top__links">
-          <Link to="/comics"
-                activeClassName="toolbar__top__links--active">
-            Comics
-          </Link>
-          <Link to="/creators"
-                activeClassName="toolbar__top__links--active">
-            Creators
-          </Link>
-          <Link to="/characters"
-                activeClassName="toolbar__top__links--active">
-            Characters
-          </Link>
+          {showComicControls && <ComicControls comics={comics}
+                                              dispatch={dispatch}/>}
+          {showCreatorControls && <CreatorControls creators={creators}
+                                              dispatch={dispatch}/>}
+          {showCharacterControls && <CharacterControls characters={characters}
+                                                  dispatch={dispatch}/>}
+
+          {showDetailsBackButton && <DetailBack/>}
+
         </div>
-        <div>
-          <UserWidget />
+        <div className={toolbarBottomClass}>
+          {showComicControls && <ComicSearch comics={comics}
+                                            dispatch={dispatch}
+                                            showSearch={showSearch && showComicControls}/>
+          }
+          {showCreatorControls && <CreatorSearch creators={creators}
+                                                dispatch={dispatch}
+                                                showSearch={showSearch && showCreatorControls}/>
+          }
+          {showCharacterControls && <CharacterSearch characters={characters}
+                                                dispatch={dispatch}
+                                                showSearch={showSearch && showCharacterControls}/>
+          }
         </div>
-        {showComicControls && <ComicControls comics={comics}
-                                             dispatch={dispatch}/>}
-        {showCreatorControls && <CreatorControls creators={creators}
-                                             dispatch={dispatch}/>}
-        {showCharacterControls && <CharacterControls characters={characters}
-                                                 dispatch={dispatch}/>}
-        {showDetailsBackButton && <DetailBack/>}
-      </div>
-      <div className={toolbarBottomClass}>
-        {showComicControls && <ComicSearch comics={comics}
-                                           dispatch={dispatch}
-                                           showSearch={showSearch && showComicControls}/>
-        }
-        {showCreatorControls && <CreatorSearch creators={creators}
-                                               dispatch={dispatch}
-                                               showSearch={showSearch && showCreatorControls}/>
-        }
-        {showCharacterControls && <CharacterSearch characters={characters}
-                                               dispatch={dispatch}
-                                               showSearch={showSearch && showCharacterControls}/>
-        }
       </div>
     </div>
   )

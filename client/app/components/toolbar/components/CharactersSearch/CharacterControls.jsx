@@ -1,5 +1,5 @@
 import React from 'react'
-import './CharacterControls.pcss'
+import '../SearchControls.pcss'
 import { updateCharactersQuery } from '../../../characters/actions'
 import path from 'ramda/src/path'
 import compose from 'ramda/src/compose'
@@ -31,8 +31,8 @@ export function CharacterControls (props) {
   } = props
 
   return (
-    <div className="creator__controls">
-      <div className="creator__controls__sorting">
+    <div className="search__controls">
+      <div className="search__controls__sorting">
         <label>
           Name
           <input type="radio"
@@ -43,7 +43,7 @@ export function CharacterControls (props) {
         </label>
       </div>
 
-      <button className="creator__controls__search"
+      <button className="search__controls__search"
               onClick={() => props.dispatch(toggleToolbarSearch())}>
         <i className="icon-search"/>
       </button>
