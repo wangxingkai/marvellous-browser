@@ -36,12 +36,12 @@ function CreatorsTile(props) {
 }
 
 CreatorsTile.propTypes = {
-  hasImages: PropTypes.bool.isRequired,
-  thumbnail: PropTypes.string.isRequired,
   creator: PropTypes.shape({
     id: PropTypes.number.isRequired,
     fullName: PropTypes.string,
     suffix: PropTypes.string,
+    thumbnail: PropTypes.string.isRequired,
+    hasImages: PropTypes.bool.isRequired,
   }),
 }
 

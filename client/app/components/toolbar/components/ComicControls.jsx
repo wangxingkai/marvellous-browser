@@ -1,8 +1,7 @@
 import React from 'react'
 import './ComicControls.pcss'
-import { loadMoreComics, updateComicsQuery } from '../../comics/actions'
+import { updateComicsQuery } from '../../comics/actions'
 import path from 'ramda/src/path'
-import pathOr from 'ramda/src/pathOr'
 import compose from 'ramda/src/compose'
 import {
   COMICS_LOAD_MORE_LIMIT,
@@ -12,20 +11,8 @@ import {
 } from '../../comics/constants'
 import { toggleToolbarSearch } from '../actions'
 
-const getNumberOfComics = pathOr(0, ['comics', 'data', 'length'])
-const getOrderBy = path(['comics', 'orderBy'])
 const getTitleStartsWith = path(['comics', 'titleStartsWith'])
 const getCharacterIds = path(['comics', 'characterIds'])
-
-const getLoadMoreComicsQueryOptions = (props) => {
-  return {
-    titleStartsWith: getTitleStartsWith(props),
-    characterIds: getCharacterIds(props),
-    start: getNumberOfComics(props),
-    limit: COMICS_LOAD_MORE_LIMIT,
-    orderBy: getOrderBy(props)
-  }
-}
 
 const orderByVariable = (
   orderBy,
@@ -35,7 +22,7 @@ const orderByVariable = (
     orderBy,
     titleStartsWith: getTitleStartsWith(props),
     characterIds: getCharacterIds(props),
-    start: getNumberOfComics(props),
+    start: 0,
     limit: COMICS_LOAD_MORE_LIMIT
   }
 }
@@ -79,11 +66,6 @@ export function ComicControls (props) {
       <button className="comic__controls__search"
               onClick={() => props.dispatch(toggleToolbarSearch())}>
         <i className="icon-search"/>
-      </button>
-
-      <button className="comic__controls__load-more"
-              onClick={() => props.dispatch(loadMoreComics(getLoadMoreComicsQueryOptions(props)))}>
-        Load More
       </button>
     </div>
   )

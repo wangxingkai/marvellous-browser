@@ -1,14 +1,26 @@
 import React from 'react'
-import Comics from '../components/Comics.jsx'
+import ComicsTile from '../components/ComicsTile.jsx'
 import pathOr from 'ramda/src/pathOr'
+import path from 'ramda/src/path'
 import { connect } from 'react-redux'
-import { loadComics } from '../actions'
+import { loadMoreComics } from '../actions'
 import compose from 'ramda/src/compose'
 import pick from 'ramda/src/pick'
 import { Helmet } from 'react-helmet'
+import InfiniteScroll from 'react-infinite-scroller'
+import {
+  COMICS_LOAD_MORE_LIMIT
+} from '../constants'
 
 const getComics = pathOr([], ['comics', 'data'])
 const viewingComicId = pathOr(false, ['params', 'id'])
+
+
+const getNumberOfComics = pathOr(0, ['comics', 'data', 'length'])
+const getOrderBy = path(['comics', 'orderBy'])
+const getTitleStartsWith = path(['comics', 'titleStartsWith'])
+const getCharacterIds = path(['comics', 'characterIds'])
+const getHasMore = path(['comics', 'hasMore'])
 
 export const getComicsQueryOptions = compose(pick([
   'orderBy',
@@ -18,10 +30,19 @@ export const getComicsQueryOptions = compose(pick([
   'characterIds'
 ]), pathOr({}, ['comics']))
 
+const getLoadMoreComicsQueryOptions = (props) => {
+  return {
+    titleStartsWith: getTitleStartsWith(props),
+    characterIds: getCharacterIds(props),
+    start: getNumberOfComics(props),
+    limit: COMICS_LOAD_MORE_LIMIT,
+    orderBy: getOrderBy(props)
+  }
+}
 class ComicsRenderer extends React.Component {
 
-  componentDidMount () {
-    this.props.dispatch(loadComics(getComicsQueryOptions(this.props)))
+  loadData(page) {
+    this.props.dispatch(loadMoreComics(getLoadMoreComicsQueryOptions(this.props)))
   }
 
   render () {
@@ -35,7 +56,16 @@ class ComicsRenderer extends React.Component {
         <Helmet>
           <title>Comics | Marvellous</title>
         </Helmet>
-        <Comics comics={comics} />
+        <InfiniteScroll
+          className="comics"
+          pageStart={0}
+          loadMore={this.loadData.bind(this)}
+          hasMore={getHasMore(this.props)}
+        >
+          {comics &&
+            comics.map((comic) => <ComicsTile key={comic.id} comic={comic}/>)
+          }
+        </InfiniteScroll>
       </div>
     )
   }

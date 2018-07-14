@@ -19,12 +19,14 @@ const initialState = {
   orderBy: params.get('orderBy') || CREATORS_ORDER_FIRSTNAME_ASC,
   nameStartsWith: params.get('nameStartsWith') || '',
   limit: params.get('limit') || 12,
-  start: params.get('start') || 0
+  start: params.get('start') || 0,
+  hasMore: true
 }
 
 const getCreatorsFromResponse = pathOr([], ['payload', 'data', 'creators'])
 const getCreatorFromResponse = pathOr({}, ['payload', 'data', 'creator'])
 const getCreatorIdResponse = pathOr(null, ['variables', 'id'])
+const getNumberOfCreators = pathOr(0, ['payload', 'data', 'creators', 'length'])
 
 const loadCreators = (state, creators) => {
   const list = [...state.list]
@@ -48,17 +50,21 @@ export function creators (
 ) {
   switch (action.type) {
     case CREATORS_LOAD_FULFILLED:
-      return loadCreators(state, getCreatorsFromResponse(action))
+      return Object.assign({}, loadCreators({}, getCreatorsFromResponse(action)), {
+        hasMore: !!getNumberOfCreators(action)
+      })
 
     case CREATORS_LOAD_MORE_FULFILLED:
-      return loadCreators(state, getCreatorsFromResponse(action))
+      return Object.assign({}, state, loadCreators(state, getCreatorsFromResponse(action)), {
+        hasMore: !!getNumberOfCreators(action)
+      })
 
     case CREATORS_DETAILS_LOAD_FULFILLED:
       return loadCreators(state, [getCreatorFromResponse(action)])
 
     case CREATORS_DETAILS_SELECT:
       return Object.assign({}, state, { selected: getCreatorIdResponse(action) })
-    
+
     case CREATORS_CHANGE_QUERY: {
       return Object.assign({}, state, {
         orderBy: propOr(state.orderBy, 'orderBy', action.variables),

@@ -33,10 +33,12 @@ const initialState = {
   characterIds: getCharacterIdsFromParams(params),
   characterSuggestions: [],
   limit: params.get('limit') || 12,
-  start: params.get('start') || 0
+  start: params.get('start') || 0,
+  hasMore: true
 }
 
 const getComicsFromResponse = pathOr([], ['payload', 'data', 'comics'])
+const getNumberOfComics = pathOr(0, ['payload', 'data', 'comics', 'length'])
 
 export function comics (
   state = initialState,
@@ -46,12 +48,14 @@ export function comics (
 
     case COMICS_LOAD_FULFILLED:
       return Object.assign({}, state, {
-        data: getComicsFromResponse(action)
+        data: getComicsFromResponse(action),
+        hasMore: !!getNumberOfComics(action)
       })
 
     case COMICS_LOAD_MORE_FULFILLED:
       return Object.assign({}, state, {
-        data: [...state.data, ...getComicsFromResponse(action)]
+        data: [...state.data, ...getComicsFromResponse(action)],
+        hasMore: !!getNumberOfComics(action)
       })
 
     case COMICS_CHANGE_QUERY: {

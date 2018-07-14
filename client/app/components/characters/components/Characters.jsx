@@ -1,15 +1,25 @@
 import React from 'react'
 import CharactersTile from './CharactersTile.jsx'
 import pathOr from 'ramda/src/pathOr'
+import path from 'ramda/src/path'
 import './Characters.pcss'
 import { connect } from 'react-redux'
-import { loadCharacters } from '../actions'
+import { loadMoreCharacters } from '../actions'
 import compose from 'ramda/src/compose'
 import pick from 'ramda/src/pick'
 import { Helmet } from 'react-helmet'
+import InfiniteScroll from 'react-infinite-scroller'
+import {
+  CHARACTERS_LOAD_MORE_LIMIT
+} from '../constants'
 
 const getCharacters = pathOr([], ['characters', 'data'])
 const viewingCharacterId = pathOr(false, ['params', 'id'])
+
+const getNumberOfComics = pathOr(0, ['characters', 'data', 'length'])
+const getOrderBy = path(['characters', 'orderBy'])
+const getNameStartsWith = path(['characters', 'nameStartsWith'])
+const getHasMore = path(['characters', 'hasMore'])
 
 export const getCharactersQueryOptions = compose(pick([
   'orderBy',
@@ -18,10 +28,19 @@ export const getCharactersQueryOptions = compose(pick([
   'nameStartsWith'
 ]), pathOr({}, ['characters']))
 
+const getLoadMoreCharactersQueryOptions = (props) => {
+  return {
+    nameStartsWith: getNameStartsWith(props),
+    start: getNumberOfComics(props),
+    limit: CHARACTERS_LOAD_MORE_LIMIT,
+    orderBy: getOrderBy(props)
+  }
+}
+
 class CharactersRenderer extends React.Component {
 
-  componentDidMount () {
-    this.props.dispatch(loadCharacters(getCharactersQueryOptions(this.props)))
+  loadData(page) {
+    this.props.dispatch(loadMoreCharacters(getLoadMoreCharactersQueryOptions(this.props)))
   }
 
   render () {
@@ -31,12 +50,18 @@ class CharactersRenderer extends React.Component {
 
     const characters = getCharacters(this.props)
     return (
-      <div className="characters">
+      <div>
         <Helmet>
           <title>Characters | Marvellous</title>
         </Helmet>
-        {characters.map((character) => <CharactersTile key={character.id}
-                                                   character={character}/>)}
+        <InfiniteScroll
+          className="characters"
+          pageStart={0}
+          loadMore={this.loadData.bind(this)}
+          hasMore={getHasMore(this.props)}
+        >
+            {characters && characters.map((character) => <CharactersTile key={character.id} character={character}/>)}
+        </InfiniteScroll>
       </div>
     )
   }

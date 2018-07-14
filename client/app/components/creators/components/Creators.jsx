@@ -1,16 +1,26 @@
 import React from 'react'
 import CreatorsTile from './CreatorsTile.jsx'
 import pathOr from 'ramda/src/pathOr'
+import path from 'ramda/src/path'
 import './Creators.pcss'
 import { connect } from 'react-redux'
-import { loadCreators } from '../actions'
+import { loadMoreCreators } from '../actions'
 import compose from 'ramda/src/compose'
 import pick from 'ramda/src/pick'
 import { Helmet } from 'react-helmet'
+import InfiniteScroll from 'react-infinite-scroller'
+import {
+  CREATORS_LOAD_MORE_LIMIT,
+} from '../constants'
 
 const getCreatorsList = pathOr([], ['creators', 'list'])
 const getCreatorsData = pathOr({}, ['creators', 'data'])
 const viewingCreatorId = pathOr(false, ['params', 'id'])
+
+const getNumberOfComics = pathOr(0, ['creators', 'list', 'length'])
+const getOrderBy = path(['creators', 'orderBy'])
+const getNameStartsWith = path(['creators', 'nameStartsWith'])
+const getHasMore = path(['creators', 'hasMore'])
 
 export const getCreatorsQueryOptions = compose(pick([
   'orderBy',
@@ -19,19 +29,28 @@ export const getCreatorsQueryOptions = compose(pick([
   'nameStartsWith'
 ]), pathOr({}, ['creators']))
 
+const getLoadMoreCreatorsQueryOptions = (props) => {
+  return {
+    nameStartsWith: getNameStartsWith(props),
+    start: getNumberOfComics(props),
+    limit: CREATORS_LOAD_MORE_LIMIT,
+    orderBy: getOrderBy(props)
+  }
+}
+
 class CreatorsRenderer extends React.Component {
 
-  componentDidMount () {
-    this.props.dispatch(loadCreators(getCreatorsQueryOptions(this.props)))
+  loadData(page) {
+    this.props.dispatch(loadMoreCreators(getLoadMoreCreatorsQueryOptions(this.props)))
   }
 
   renderCreators() {
-    const creatorsList = getCreatorsList(this.props)
+    const creatorsList = getCreatorsList(this.props);
     const creatorsData = getCreatorsData(this.props);
 
-    return creatorsList.map((creatorId) => {
+    return creatorsList && creatorsList.map((creatorId) => {
       const creator = creatorsData[creatorId];
-      return <CreatorsTile key={creator.id} creator={creator}/>
+      return <CreatorsTile key={creator.id} creator={creator}/>;
     })
   }
 
@@ -41,11 +60,18 @@ class CreatorsRenderer extends React.Component {
     }
 
     return (
-      <div className="creators">
+      <div>
         <Helmet>
           <title>Creators | Marvellous</title>
         </Helmet>
+        <InfiniteScroll
+          className="creators"
+          pageStart={0}
+          loadMore={this.loadData.bind(this)}
+          hasMore={getHasMore(this.props)}
+        >
         {this.renderCreators()}
+        </InfiniteScroll>
       </div>
     )
   }

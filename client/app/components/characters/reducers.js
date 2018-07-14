@@ -16,10 +16,12 @@ const initialState = {
   orderBy: params.get('orderBy') || CHARACTERS_ORDER_NAME_ASC,
   nameStartsWith: params.get('nameStartsWith') || '',
   limit: params.get('limit') || 12,
-  start: params.get('start') || 0
+  start: params.get('start') || 0,
+  hasMore: true
 }
 
 const getCharactersFromResponse = pathOr([], ['payload', 'data', 'characters'])
+const getNumberOfCharacters = pathOr(0, ['payload', 'data', 'characters', 'length'])
 
 export function characters (
   state = initialState,
@@ -29,12 +31,14 @@ export function characters (
 
     case CHARACTERS_LOAD_FULFILLED:
       return Object.assign({}, state, {
-        data: getCharactersFromResponse(action)
+        data: getCharactersFromResponse(action),
+        hasMore: !!getNumberOfCharacters(action)
       })
 
     case CHARACTERS_LOAD_MORE_FULFILLED:
       return Object.assign({}, state, {
-        data: [...state.data, ...getCharactersFromResponse(action)]
+        data: [...state.data, ...getCharactersFromResponse(action)],
+        hasMore: !!getNumberOfCharacters(action)
       })
 
     case CHARACTERS_CHANGE_QUERY: {
