@@ -1,5 +1,5 @@
 import React from 'react'
-import ComicsTile from '../components/ComicsTile.jsx'
+import Comics from '../components/Comics.jsx'
 import pathOr from 'ramda/src/pathOr'
 import path from 'ramda/src/path'
 import { connect } from 'react-redux'
@@ -57,14 +57,11 @@ class ComicsRenderer extends React.Component {
           <title>Comics | Marvellous</title>
         </Helmet>
         <InfiniteScroll
-          className="comics"
           pageStart={0}
           loadMore={this.loadData.bind(this)}
           hasMore={getHasMore(this.props)}
         >
-          {comics &&
-            comics.map((comic) => <ComicsTile key={comic.id} comic={comic}/>)
-          }
+          <Comics comics={comics} />
         </InfiniteScroll>
       </div>
     )

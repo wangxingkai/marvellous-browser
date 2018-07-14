@@ -6,9 +6,9 @@ import length from 'ramda/src/length'
 import compose from 'ramda/src/compose'
 import propOr from 'ramda/src/propOr'
 import {Helmet} from 'react-helmet'
-import {Link} from 'react-router'
 import {updateComicsQuery} from '../../../comics/actions'
 import {connect} from 'react-redux'
+import Comics from '../../../comics/components/Comics'
 
 const getCharacter = pathOr(false, ['data', 'character'])
 const hasComics = compose(length, propOr([], 'comics'))
@@ -37,7 +37,7 @@ function MoreComics(props) {
   )
 }
 
-function Comics(props) {
+function ComicsOfCharacter(props) {
   const {
     character,
     dispatch
@@ -52,20 +52,8 @@ function Comics(props) {
 
   return (
     <div className="character__comics">
-      <h2>Comics</h2>
-      <div className="character__comics__wrapper">
-        {comics.map((comic) => {
-          return (
-            <Link key={comic.id}
-                  to={`/comics/${comic.id}`}
-                  className="character__comics__wrapper__comic">
-              <img src={comic.thumbnail}/>
-              <h3>{comic.title}</h3>
-              {comic.description && <p dangerouslySetInnerHTML={{__html: comic.description}}/>}
-            </Link>
-          )
-        })}
-      </div>
+      <h2>Comics of {character.name}</h2>
+      <Comics comics={comics} />
       <MoreComics hasMoreComics={hasMoreComics}
                   character={character}
                   dispatch={dispatch}/>
@@ -103,7 +91,7 @@ function CharacterRenderer(props) {
         </div>
         <p className="character__description"
            dangerouslySetInnerHTML={{__html: character.description}}/>
-        <Comics character={character}
+        <ComicsOfCharacter character={character}
                 dispatch={props.dispatch}/>
       </div>
 
@@ -118,7 +106,7 @@ function CharacterRenderer(props) {
                dangerouslySetInnerHTML={{__html: character.description}}/>
           </div>
         </div>
-        <Comics character={character}
+        <ComicsOfCharacter character={character}
                 dispatch={props.dispatch}/>
       </div>
     </div>
@@ -134,9 +122,9 @@ const CHARACTER_QUERY = gql`query ($id: Int!) {
     comicsTotal
     comics {
       id
-      description
       title
       thumbnail
+      hasImages
     }
   }
 }`
