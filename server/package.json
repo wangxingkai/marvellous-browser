@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/babel-node index.js | ./node_modules/.bin/bunyan",
-    "start:watch": "babel-watch --watch schema index.js | bunyan"
+    "start:watch": "babel-watch --inspect --watch schema index.js | bunyan"
   },
   "author": "",
   "license": "ISC",
