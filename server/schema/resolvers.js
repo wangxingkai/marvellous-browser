@@ -1,20 +1,52 @@
 import {COMICS_ORDER_ISSUE_NUMBER_DESC} from '../constants'
-import {comicDetailLoader} from './dataloaders/comicDetail'
 import {comicsLoader} from './dataloaders/comics'
-import {seriesDetailLoader} from './dataloaders/seriesDetail'
-import {characterDetailLoader} from './dataloaders/characterDetail'
+import {comicLoader} from './dataloaders/comic'
+import {seriesLoader} from './dataloaders/series'
 import {charactersLoader} from './dataloaders/characters'
-import {creatorDetailLoader} from './dataloaders/creatorDetail'
+import {characterLoader} from './dataloaders/character'
 import {creatorsLoader} from './dataloaders/creators'
+import {creatorLoader} from './dataloaders/creator'
 import R from 'ramda'
+import {extractIdFromURI} from '../helpers/extract-id-from-uri'
+
+const getId = R.compose(
+  extractIdFromURI,
+  R.prop('resourceURI')
+)
 
 export const resolvers = {
+  Comic: {
+    series(comic, args, ctx, info) {
+      return seriesLoader.load(getId(comic.series))
+    },
+    characters(comic, args, ctx, info) {
+      return characterLoader.loadMany(R.map(getId, comic.characters))
+    },
+    creators(comic, args, ctx, info) {
+      return creatorLoader.loadMany(R.map(getId, comic.creators))
+    }
+  },
+  Series: {
+    comics(series, args, ctx, info) {
+      return comicLoader.loadMany(R.map(getId, series.comics))
+    }
+  },
+  Character: {
+    comics(character, args, ctx, info) {
+      return comicLoader.loadMany(R.map(getId, character.comics))
+    }
+  },
+  Creator: {
+    comics(creator, args, ctx, info) {
+      return comicLoader.loadMany(R.map(getId, creator.comics))
+    }
+  },
   Query: {
     creator(
       obj,
       {id}
     ) {
-      return creatorDetailLoader.load(id)
+      return creatorLoader.load(id)
     },
 
     creators(
@@ -43,7 +75,7 @@ export const resolvers = {
       obj,
       {id}
     ) {
-      return comicDetailLoader.load(id)
+      return comicLoader.load(id)
     },
 
     comics(
@@ -82,14 +114,14 @@ export const resolvers = {
       obj,
       {id}
     ) {
-      return seriesDetailLoader.load(id)
+      return seriesLoader.load(id)
     },
 
     character(
       obj,
       {id}
     ) {
-      return characterDetailLoader.load(id)
+      return characterLoader.load(id)
     },
 
     characters(
