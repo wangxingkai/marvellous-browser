@@ -1,0 +1,91 @@
+@import '../../../styles/variables.pcss';
+
+.series {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+  min-height: 100vh;
+
+  &__comics__view-more,
+  &__comics__view-more:link {
+    width: 100%;
+    min-height: 45px;
+    background-color: var(--colour-highlight);
+    display: block;
+    color: var(--colour-white);
+    line-height: 25px;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 5px;
+    cursor: pointer;
+  }
+}
+
+.series--phone {
+  .series__hero {
+    width: 100vw;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .series__description {
+    margin-top: 20px;
+    padding: 0 15px;
+  }
+
+  .series__title,
+  .series__description,
+  .series__seriess h2 {
+    padding: 0 15px;
+  }
+
+  .series__comics h2 {
+    margin-top: 30px;
+  }
+}
+
+.series__portrait-tablet {
+  display: none;
+}
+
+@media (--portrait-tablets) {
+  .series--phone {
+    display: none;
+  }
+
+  .series__portrait-tablet {
+    display: flex;
+
+    .series__portrait-tablet__wrapper {
+      display: flex;
+      flex-direction: row;
+      flex-shrink: 0;
+    }
+
+    .series__hero {
+      lost-column: 1/2 2 20px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .series__portrait-tablet__information {
+      lost-column: 1/2 2 20px;
+    }
+
+    .series__title,
+    .series__description,
+    .series__comics h2 {
+      padding: 0 15px;
+    }
+
+    .series__comics {
+      width: 100%;
+    }
+  }
+}
+

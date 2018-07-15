@@ -8,11 +8,37 @@ import compose from 'ramda/src/compose'
 import propOr from 'ramda/src/propOr'
 import {Helmet} from 'react-helmet'
 import {Link} from 'react-router'
+import Tile from '../../../tile/Tile'
 
 const getComic = pathOr(false, ['data', 'comic'])
 const hasCharacters = compose(length, propOr([], 'characters'))
 const hasCreators = compose(length, propOr([], 'creators'))
 const getComicImage = compose(head, propOr([], 'images'))
+
+function SeriesOfComic(props) {
+  const { comic } = props
+
+  if (!comic.series) {
+    return null
+  }
+
+  const series = comic.series
+
+  return (
+    <div className="comic__series">
+      <h2>Series</h2>
+      <div className="comic__series__wrapper">
+        <Tile
+            id={series.id}
+            url={`/series/${series.id}`}
+            title={series.title}
+            thumbnail={series.thumbnail}
+            hasImages={series.hasImages}
+          />
+      </div>
+    </div>
+  )
+}
 
 function Characters(props) {
   if (!hasCharacters(props)) {
@@ -97,6 +123,7 @@ function ComicRenderer(props) {
         </div>
         <p className="comic__description"
            dangerouslySetInnerHTML={{__html: comic.description}}/>
+        <SeriesOfComic comic={comic}/>
         <Characters characters={comic.characters}/>
         <Creators creators={comic.creators}/>
       </div>
@@ -112,6 +139,7 @@ function ComicRenderer(props) {
                dangerouslySetInnerHTML={{__html: comic.description}}/>
           </div>
         </div>
+        <SeriesOfComic comic={comic}/>
         <Characters characters={comic.characters}/>
         <Creators creators={comic.creators}/>
       </div>
@@ -125,6 +153,13 @@ const COMIC_QUERY = gql`query ($id: Int!) {
     title
     images
     description
+    series {
+      id
+      title
+      description
+      thumbnail
+      hasImages
+    }
     characters {
       id
       description

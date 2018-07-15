@@ -17,11 +17,18 @@ import {
   COMICS_UPDATE_TITLE_STARTS_WITH
 } from './constants'
 
-const getCharacterIdsFromParams = (params) => {
+const getCharacterIdsFromParams = (params, key) => {
   if (!params.characterIds) {
     return []
   }
   return compose(map((id) => ({ id, name: id })), split(','), defaultTo(''))(params.get('characterIds'))(params)
+}
+
+const getSeriesIdsFromParams = (params, key) => {
+  if (!params.seriesIds) {
+    return []
+  }
+  return compose(map((id) => ({ id, title: id })), split(','), defaultTo(''))(params.get('seriesIds'))(params)
 }
 
 // eslint-disable-next-line no-undef
@@ -31,6 +38,7 @@ const initialState = {
   orderBy: params.get('orderBy') || COMICS_ORDER_ISSUE_NUMBER_DESC,
   titleStartsWith: params.get('titleStartsWith') || '',
   characterIds: getCharacterIdsFromParams(params),
+  seriesIds: getSeriesIdsFromParams(params),
   characterSuggestions: [],
   limit: params.get('limit') || 12,
   start: params.get('start') || 0,
@@ -62,7 +70,8 @@ export function comics (
     return Object.assign({}, state, {
       orderBy: propOr(state.orderBy, 'orderBy', action.variables),
       titleStartsWith: propOr(state.titleStartsWith, 'titleStartsWith', action.variables),
-      characterIds: propOr(state.characterIds, 'characterIds', action.variables)
+      characterIds: propOr(state.characterIds, 'characterIds', action.variables),
+      seriesIds: propOr(state.seriesIds, 'seriesIds', action.variables)
     })
   }
 

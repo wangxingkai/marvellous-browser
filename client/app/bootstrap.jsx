@@ -12,6 +12,7 @@ import Characters from './components/characters/components/Characters'
 import Character from './components/characters/components/character/Character'
 import Creators from './components/creators/components/Creators'
 import CreatorsDetails from './components/creators/components/CreatorsDetails'
+import SeriesDetails from './components/Series/components/SeriesDetails'
 import Login from './components/login/components/Login'
 import { client } from './client'
 import useScroll from 'react-router-scroll/lib/useScroll'
@@ -37,8 +38,10 @@ export const bootstrap = () => {
           </Route>
 
           <Route path="/characters" component={Characters}>
-            <Route path="/characters/:id" component={(props) => <Character id={props.params.id}/>}/>
+          <Route path="/characters/:id" component={(props) => <Character id={props.params.id}/>}/>
           </Route>
+
+          <Route path="/series/:id" component={(props) => <SeriesDetails id={props.params.id}/>}/>
 
           <Route path="/login" component={Login}/>
         </Route>

@@ -25,7 +25,8 @@ import {browserHistory} from 'react-router'
 import {objectToQueryParams} from '../../helpers/objectToQueryParams'
 
 const cleanComicsVariables = evolve({
-  characterIds: map((characterId) => characterId.id)
+  characterIds: (characterIds) => characterIds && map((characterId) => characterId.id)(characterIds),
+  seriesIds: (seriesId) => seriesId && map((seriesId) => seriesId.id)(seriesId),
 })
 
 const mergeQueryVariables = compose(cleanComicsVariables, merge({
@@ -33,6 +34,7 @@ const mergeQueryVariables = compose(cleanComicsVariables, merge({
   limit: 12,
   titleStartsWith: null,
   characterIds: null,
+  seriesIds: null,
   orderBy: COMICS_ORDER_ISSUE_NUMBER_DESC
 }), clone)
 
@@ -41,14 +43,16 @@ export const COMICS_QUERY = gql`query (
     $limit: Int,
     $orderBy: String,
     $titleStartsWith: String,
-    $characterIds: [Int]
+    $characterIds: [Int],
+    $seriesIds: [Int]
   ) {
     comics(
       start: $start,
       limit: $limit,
       orderBy: $orderBy,
       titleStartsWith: $titleStartsWith,
-      characterIds: $characterIds
+      characterIds: $characterIds,
+      seriesIds: $seriesIds
     ) {
       id
       title
