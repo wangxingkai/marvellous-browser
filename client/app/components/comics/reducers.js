@@ -25,7 +25,7 @@ const getCharacterIdsFromParams = (params) => {
 }
 
 // eslint-disable-next-line no-undef
-const params = new URLSearchParams(location.search.slice(1));
+const params = new URLSearchParams(location.search.slice(1))
 const initialState = {
   data: [],
   orderBy: params.get('orderBy') || COMICS_ORDER_ISSUE_NUMBER_DESC,
@@ -46,51 +46,51 @@ export function comics (
 ) {
   switch (action.type) {
 
-    case COMICS_LOAD_FULFILLED:
-      return Object.assign({}, state, {
-        data: getComicsFromResponse(action),
-        hasMore: !!getNumberOfComics(action)
-      })
+  case COMICS_LOAD_FULFILLED:
+    return Object.assign({}, state, {
+      data: getComicsFromResponse(action),
+      hasMore: !!getNumberOfComics(action)
+    })
 
-    case COMICS_LOAD_MORE_FULFILLED:
-      return Object.assign({}, state, {
-        data: [...state.data, ...getComicsFromResponse(action)],
-        hasMore: !!getNumberOfComics(action)
-      })
+  case COMICS_LOAD_MORE_FULFILLED:
+    return Object.assign({}, state, {
+      data: [...state.data, ...getComicsFromResponse(action)],
+      hasMore: !!getNumberOfComics(action)
+    })
 
-    case COMICS_CHANGE_QUERY: {
-      return Object.assign({}, state, {
-        orderBy: propOr(state.orderBy, 'orderBy', action.variables),
-        titleStartsWith: propOr(state.titleStartsWith, 'titleStartsWith', action.variables),
-        characterIds: propOr(state.characterIds, 'characterIds', action.variables)
-      })
-    }
+  case COMICS_CHANGE_QUERY: {
+    return Object.assign({}, state, {
+      orderBy: propOr(state.orderBy, 'orderBy', action.variables),
+      titleStartsWith: propOr(state.titleStartsWith, 'titleStartsWith', action.variables),
+      characterIds: propOr(state.characterIds, 'characterIds', action.variables)
+    })
+  }
 
-    case COMICS_UPDATE_TITLE_STARTS_WITH: {
-      return Object.assign({}, state, {
-        titleStartsWith: action.titleStartsWith
-      })
-    }
+  case COMICS_UPDATE_TITLE_STARTS_WITH: {
+    return Object.assign({}, state, {
+      titleStartsWith: action.titleStartsWith
+    })
+  }
 
-    case COMICS_SEARCH_ADD_CHARACTER_SUGGESTION: {
-      return Object.assign({}, state, {
-        characterIds: [...state.characterIds, ...[action.suggestion]]
-      })
-    }
+  case COMICS_SEARCH_ADD_CHARACTER_SUGGESTION: {
+    return Object.assign({}, state, {
+      characterIds: [...state.characterIds, ...[action.suggestion]]
+    })
+  }
 
-    case COMICS_SEARCH_DELETE_CHARACTER_SUGGESTION: {
-      return Object.assign({}, state, {
-        characterIds: remove(action.index, 1, state.characterIds)
-      })
-    }
+  case COMICS_SEARCH_DELETE_CHARACTER_SUGGESTION: {
+    return Object.assign({}, state, {
+      characterIds: remove(action.index, 1, state.characterIds)
+    })
+  }
 
-    case COMICS_SEARCH_FETCH_CHARACTER_SUGGESTIONS_FULFILLED: {
-      return Object.assign({}, state, {
-        characterSuggestions: action.payload.data.characters
-      })
-    }
+  case COMICS_SEARCH_FETCH_CHARACTER_SUGGESTIONS_FULFILLED: {
+    return Object.assign({}, state, {
+      characterSuggestions: action.payload.data.characters
+    })
+  }
 
-    default:
-      return state
+  default:
+    return state
   }
 }

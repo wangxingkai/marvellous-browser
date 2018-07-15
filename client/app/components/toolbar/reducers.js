@@ -10,18 +10,18 @@ export function toolbar (
   action
 ) {
   switch (action.type) {
-    case TOOLBAR_TOGGLE:
-      return Object.assign({}, state, {
-        show: !state.show
-      })
+  case TOOLBAR_TOGGLE:
+    return Object.assign({}, state, {
+      show: !state.show
+    })
 
-    case TOOLBAR_SEARCH_TOGGLE: {
-      return Object.assign({}, state, {
-        showSearch: !state.showSearch
-      })
-    }
+  case TOOLBAR_SEARCH_TOGGLE: {
+    return Object.assign({}, state, {
+      showSearch: !state.showSearch
+    })
+  }
 
-    default:
-      return state
+  default:
+    return state
   }
 }

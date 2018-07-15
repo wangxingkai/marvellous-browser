@@ -14,16 +14,16 @@ describe('Comics actions', () => {
       type: constants.COMICS_UPDATE_TITLE_STARTS_WITH,
       titleStartsWith
     }
-    expect(actions.updateTitleStartsWith(titleStartsWith)).toEqual(expectedAction);
+    expect(actions.updateTitleStartsWith(titleStartsWith)).toEqual(expectedAction)
   })
 
   it('should load comics with given options', () => {
     const queryOptions = {
       characterIds: [1,2,3],
-      orderBy: "-issueNumber",
+      orderBy: '-issueNumber',
       start: 0,
       limit: 12,
-      titleStartsWith: ""
+      titleStartsWith: ''
     }
 
     const expectedAction = {
@@ -35,16 +35,16 @@ describe('Comics actions', () => {
         })(queryOptions)
       })
     }
-    expect(actions.loadComics(queryOptions)).toEqual(expectedAction);
+    expect(actions.loadComics(queryOptions)).toEqual(expectedAction)
   })
 
   it('should load 12 more comics with given options', () => {
     const queryOptions = {
       characterIds: [4,5,6],
-      orderBy: "-issueNumber",
+      orderBy: '-issueNumber',
       start: 24,
       limit: 12,
-      titleStartsWith: "abc"
+      titleStartsWith: 'abc'
     }
 
     const expectedAction = {
@@ -56,15 +56,15 @@ describe('Comics actions', () => {
         })(queryOptions)
       })
     }
-    expect(actions.loadMoreComics(queryOptions)).toEqual(expectedAction);
+    expect(actions.loadMoreComics(queryOptions)).toEqual(expectedAction)
   })
 
   it('update comics collection with given variables', () => {
-    spyOn(browserHistory, 'push');
+    spyOn(browserHistory, 'push')
     const variables = {
       characterIds: [4,5,6],
-      orderBy: "-issueNumber",
-      titleStartsWith: "abc"
+      orderBy: '-issueNumber',
+      titleStartsWith: 'abc'
     }
 
     const mergedVariables = R.compose(

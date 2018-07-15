@@ -10,7 +10,7 @@ import R from 'ramda'
 export const resolvers = {
   Query: {
     creator(
-      obj, 
+      obj,
       {id}
     ) {
       return creatorDetailLoader.load(id)
@@ -39,7 +39,7 @@ export const resolvers = {
     },
 
     comic(
-      obj, 
+      obj,
       {id}
     ) {
       return comicDetailLoader.load(id)
@@ -73,7 +73,7 @@ export const resolvers = {
     },
 
     character(
-      obj, 
+      obj,
       {id}
     ) {
       return characterDetailLoader.load(id)
@@ -123,4 +123,4 @@ export const resolvers = {
       { userStore }
     ) => userStore.register(credential)
   }
-};
+}

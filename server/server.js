@@ -6,11 +6,11 @@ import bunyan from 'bunyan'
 import hapiBunyan from 'hapi-bunyan'
 import inert from 'inert'
 import staticServer from './plugins/static'
-import UserStore from './store/UserStore';
+import UserStore from './store/UserStore'
 
 export const getServer = async () => {
   const server = new hapi.Server()
-  const userStore=new UserStore();
+  const userStore=new UserStore()
 
   server.connection({
     host: config.get('HOST'),

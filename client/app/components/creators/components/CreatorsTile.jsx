@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import './CreatorsTile.pcss'
 import {Link} from 'react-router'
 import classNames from 'classnames'

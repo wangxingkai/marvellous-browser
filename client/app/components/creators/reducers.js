@@ -12,7 +12,7 @@ import {
 } from './constants'
 
 // eslint-disable-next-line no-undef
-const params = new URLSearchParams(location.search.slice(1));
+const params = new URLSearchParams(location.search.slice(1))
 const initialState = {
   data: {},
   list: [],
@@ -36,7 +36,7 @@ const loadCreators = (state, creators) => {
     }
     data[creator.id] = creator
     return data
-  }, {}));
+  }, {}))
 
   return Object.assign({}, state, {
     data,
@@ -49,36 +49,36 @@ export function creators (
   action
 ) {
   switch (action.type) {
-    case CREATORS_LOAD_FULFILLED:
-      return Object.assign({}, loadCreators({}, getCreatorsFromResponse(action)), {
-        hasMore: !!getNumberOfCreators(action)
-      })
+  case CREATORS_LOAD_FULFILLED:
+    return Object.assign({}, loadCreators({}, getCreatorsFromResponse(action)), {
+      hasMore: !!getNumberOfCreators(action)
+    })
 
-    case CREATORS_LOAD_MORE_FULFILLED:
-      return Object.assign({}, state, loadCreators(state, getCreatorsFromResponse(action)), {
-        hasMore: !!getNumberOfCreators(action)
-      })
+  case CREATORS_LOAD_MORE_FULFILLED:
+    return Object.assign({}, state, loadCreators(state, getCreatorsFromResponse(action)), {
+      hasMore: !!getNumberOfCreators(action)
+    })
 
-    case CREATORS_DETAILS_LOAD_FULFILLED:
-      return loadCreators(state, [getCreatorFromResponse(action)])
+  case CREATORS_DETAILS_LOAD_FULFILLED:
+    return loadCreators(state, [getCreatorFromResponse(action)])
 
-    case CREATORS_DETAILS_SELECT:
-      return Object.assign({}, state, { selected: getCreatorIdResponse(action) })
+  case CREATORS_DETAILS_SELECT:
+    return Object.assign({}, state, { selected: getCreatorIdResponse(action) })
 
-    case CREATORS_CHANGE_QUERY: {
-      return Object.assign({}, state, {
-        orderBy: propOr(state.orderBy, 'orderBy', action.variables),
-        nameStartsWith: propOr(state.nameStartsWith, 'nameStartsWith', action.variables)
-      })
-    }
+  case CREATORS_CHANGE_QUERY: {
+    return Object.assign({}, state, {
+      orderBy: propOr(state.orderBy, 'orderBy', action.variables),
+      nameStartsWith: propOr(state.nameStartsWith, 'nameStartsWith', action.variables)
+    })
+  }
 
-    case CREATORS_UPDATE_NAME_STARTS_WITH: {
-      return Object.assign({}, state, {
-        nameStartsWith: action.nameStartsWith
-      })
-    }
+  case CREATORS_UPDATE_NAME_STARTS_WITH: {
+    return Object.assign({}, state, {
+      nameStartsWith: action.nameStartsWith
+    })
+  }
 
-    default:
-      return state
+  default:
+    return state
   }
 }

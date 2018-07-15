@@ -10,7 +10,7 @@ import {
 } from './constants'
 
 // eslint-disable-next-line no-undef
-const params = new URLSearchParams(location.search.slice(1));
+const params = new URLSearchParams(location.search.slice(1))
 const initialState = {
   data: [],
   orderBy: params.get('orderBy') || CHARACTERS_ORDER_NAME_ASC,
@@ -29,32 +29,32 @@ export function characters (
 ) {
   switch (action.type) {
 
-    case CHARACTERS_LOAD_FULFILLED:
-      return Object.assign({}, state, {
-        data: getCharactersFromResponse(action),
-        hasMore: !!getNumberOfCharacters(action)
-      })
+  case CHARACTERS_LOAD_FULFILLED:
+    return Object.assign({}, state, {
+      data: getCharactersFromResponse(action),
+      hasMore: !!getNumberOfCharacters(action)
+    })
 
-    case CHARACTERS_LOAD_MORE_FULFILLED:
-      return Object.assign({}, state, {
-        data: [...state.data, ...getCharactersFromResponse(action)],
-        hasMore: !!getNumberOfCharacters(action)
-      })
+  case CHARACTERS_LOAD_MORE_FULFILLED:
+    return Object.assign({}, state, {
+      data: [...state.data, ...getCharactersFromResponse(action)],
+      hasMore: !!getNumberOfCharacters(action)
+    })
 
-    case CHARACTERS_CHANGE_QUERY: {
-      return Object.assign({}, state, {
-        orderBy: propOr(state.orderBy, 'orderBy', action.variables),
-        nameStartsWith: propOr(state.nameStartsWith, 'nameStartsWith', action.variables)
-      })
-    }
+  case CHARACTERS_CHANGE_QUERY: {
+    return Object.assign({}, state, {
+      orderBy: propOr(state.orderBy, 'orderBy', action.variables),
+      nameStartsWith: propOr(state.nameStartsWith, 'nameStartsWith', action.variables)
+    })
+  }
 
-    case CHARACTERS_UPDATE_NAME_STARTS_WITH: {
-      return Object.assign({}, state, {
-        nameStartsWith: action.nameStartsWith
-      })
-    }
+  case CHARACTERS_UPDATE_NAME_STARTS_WITH: {
+    return Object.assign({}, state, {
+      nameStartsWith: action.nameStartsWith
+    })
+  }
 
-    default:
-      return state
+  default:
+    return state
   }
 }

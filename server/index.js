@@ -4,7 +4,7 @@ import Raven from 'raven'
 import {config} from './config'
 
 if (config.get('RAVEN_URL_BACKEND')) {
-  Raven.config(config.get('RAVEN_URL_BACKEND')).install();
+  Raven.config(config.get('RAVEN_URL_BACKEND')).install()
 }
 
 

@@ -13,7 +13,7 @@ import {CreatorSearch} from './CreatorSearch/CreatorSearch'
 import {CharacterControls} from './CharactersSearch/CharacterControls'
 import {CharacterSearch} from './CharactersSearch/CharacterSearch'
 import {DetailBack} from './DetailBack'
-import UserWidget from '../../login/components/UserWidget';
+import UserWidget from '../../login/components/UserWidget'
 
 const getPathname = pathOr('', ['routing', 'locationBeforeTransitions', 'pathname'])
 const isOnDetailsPage = () => {

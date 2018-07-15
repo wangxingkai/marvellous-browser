@@ -4,7 +4,7 @@
  * The idea here is to determine whether the fetch polyfill is required, and dynamically load it if necessary.
  *
  * Unfortunately apollo-client and fetch-interceptor also import the fetch polyfill, which causes Webpack to ignore this attempt to split the polyfill out
- * 
+ *
  * An alias has been added to the webpack config which returns this conditional require if `whatwg-fetch` is imported from any library
  */
 

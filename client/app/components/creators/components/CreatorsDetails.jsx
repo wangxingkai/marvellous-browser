@@ -20,7 +20,7 @@ class CreatorsDetails extends Component {
       <Helmet>
         <title>{`${fullName} | Creators | Marvellous`}</title>
       </Helmet>
-      
+
       <div className="creators-details-header">
         <CreatorsTile hasImages={false} creator={creator} large />
         <h1>{suffix ? `${suffix} ` : ''}{fullName}</h1>
@@ -29,7 +29,7 @@ class CreatorsDetails extends Component {
       {comicsTotal > 0 &&
         <div>
           <h2>Comics by {fullName}</h2>
-          <Comics comics={comics} /> 
+          <Comics comics={comics} />
         </div>
       }
     </div>
@@ -37,7 +37,7 @@ class CreatorsDetails extends Component {
 }
 
 export default connect((state) => {
-  const { data, selected } = state.creators;
+  const { data, selected } = state.creators
   return {
     creator: data[selected] || {}
   }

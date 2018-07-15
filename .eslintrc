@@ -7,6 +7,12 @@
     "react"
   ],
   "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "no-trailing-spaces": "error",
+
     "react/display-name": "error",
     "react/jsx-no-duplicate-props": "error",
     "react/jsx-no-undef": "error",

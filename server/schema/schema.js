@@ -1,4 +1,4 @@
-export default`
+export default `
 type Comics {
   comics: [Comics]
 }
@@ -62,19 +62,19 @@ type EmailAvalibilityCheckResult{
 type Query {
   # login a user with credential
   login(credential:UserCredentialInput!):User
-  
+
   # check if an user exists
   isEmailRegistered(email:String!):EmailAvalibilityCheckResult
 
   comic(id: Int!): Comic
   comics(
-    start: Int = 0, 
-    limit: Int = 12, 
+    start: Int = 0,
+    limit: Int = 12,
     orderBy: String,
     titleStartsWith: String,
     characterIds: [Int]
   ): [Comic]
-  
+
   character(id: Int!): Character
   characters(
     start: Int = 0,
@@ -82,7 +82,7 @@ type Query {
     orderBy: String,
     nameStartsWith: String
   ): [Character]
-  
+
   creator(id: Int!): Creator
   creators(
     start: Int = 0,

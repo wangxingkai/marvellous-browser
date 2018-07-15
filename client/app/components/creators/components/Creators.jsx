@@ -45,12 +45,12 @@ class CreatorsRenderer extends React.Component {
   }
 
   renderCreators() {
-    const creatorsList = getCreatorsList(this.props);
-    const creatorsData = getCreatorsData(this.props);
+    const creatorsList = getCreatorsList(this.props)
+    const creatorsData = getCreatorsData(this.props)
 
     return creatorsList && creatorsList.map((creatorId) => {
-      const creator = creatorsData[creatorId];
-      return <CreatorsTile key={creator.id} creator={creator}/>;
+      const creator = creatorsData[creatorId]
+      return <CreatorsTile key={creator.id} creator={creator}/>
     })
   }
 

@@ -14,15 +14,15 @@ describe('Characters actions', () => {
       type: constants.CHARACTERS_UPDATE_NAME_STARTS_WITH,
       nameStartsWith
     }
-    expect(actions.updateNameStartsWith(nameStartsWith)).toEqual(expectedAction);
+    expect(actions.updateNameStartsWith(nameStartsWith)).toEqual(expectedAction)
   })
 
   it('should load characters with given options', () => {
     const queryOptions = {
-      orderBy: "name",
+      orderBy: 'name',
       start: 0,
       limit: 12,
-      nameStartsWith: ""
+      nameStartsWith: ''
     }
 
     const expectedAction = {
@@ -32,16 +32,16 @@ describe('Characters actions', () => {
         variables: queryOptions
       })
     }
-    expect(actions.loadCharacters(queryOptions)).toEqual(expectedAction);
+    expect(actions.loadCharacters(queryOptions)).toEqual(expectedAction)
   })
 
   it('should load 12 more characters with given options', () => {
     const queryOptions = {
       characterIds: [4,5,6],
-      orderBy: "-issueNumber",
+      orderBy: '-issueNumber',
       start: 24,
       limit: 12,
-      titleStartsWith: "abc"
+      titleStartsWith: 'abc'
     }
 
     const expectedAction = {
@@ -51,15 +51,15 @@ describe('Characters actions', () => {
         variables: queryOptions
       })
     }
-    expect(actions.loadMoreCharacters(queryOptions)).toEqual(expectedAction);
+    expect(actions.loadMoreCharacters(queryOptions)).toEqual(expectedAction)
   })
 
   it('update characters collection with given variables', () => {
-    spyOn(browserHistory, 'push');
+    spyOn(browserHistory, 'push')
 
     const variables = {
-      orderBy: "name",
-      nameStartsWith: "efg"
+      orderBy: 'name',
+      nameStartsWith: 'efg'
     }
 
     const mergedVariables = R.compose(R.merge({

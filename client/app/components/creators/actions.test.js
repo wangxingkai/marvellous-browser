@@ -15,15 +15,15 @@ describe('Creators actions', () => {
       type: constants.CREATORS_UPDATE_NAME_STARTS_WITH,
       nameStartsWith
     }
-    expect(actions.updateNameStartsWith(nameStartsWith)).toEqual(expectedAction);
+    expect(actions.updateNameStartsWith(nameStartsWith)).toEqual(expectedAction)
   })
 
   it('should load creators with given options', () => {
     const queryOptions = {
-      orderBy: "name",
+      orderBy: 'name',
       start: 0,
       limit: 12,
-      nameStartsWith: ""
+      nameStartsWith: ''
     }
 
     const expectedAction = {
@@ -33,15 +33,15 @@ describe('Creators actions', () => {
         variables: queryOptions
       })
     }
-    expect(actions.loadCreators(queryOptions)).toEqual(expectedAction);
+    expect(actions.loadCreators(queryOptions)).toEqual(expectedAction)
   })
 
   it('should load 12 more creators with given options', () => {
     const queryOptions = {
-      orderBy: "name",
+      orderBy: 'name',
       start: 24,
       limit: 12,
-      nameStartsWith: "abc"
+      nameStartsWith: 'abc'
     }
 
     const expectedAction = {
@@ -51,15 +51,15 @@ describe('Creators actions', () => {
         variables: queryOptions
       })
     }
-    expect(actions.loadMoreCreators(queryOptions)).toEqual(expectedAction);
+    expect(actions.loadMoreCreators(queryOptions)).toEqual(expectedAction)
   })
 
   it('update creators collection with given variables', () => {
-    spyOn(browserHistory, 'push');
+    spyOn(browserHistory, 'push')
 
     const variables = {
-      orderBy: "name",
-      nameStartsWith: "faeaf"
+      orderBy: 'name',
+      nameStartsWith: 'faeaf'
     }
 
     const mergedVariables = R.compose(R.merge({
