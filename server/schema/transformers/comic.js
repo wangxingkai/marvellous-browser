@@ -19,6 +19,7 @@ export const transformComic = (rawComic) => {
       'images',
       'description',
       'variantDescription',
+      'series',
       'characters',
       'creators'
     ])

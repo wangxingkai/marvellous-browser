@@ -1,6 +1,7 @@
+import {COMICS_ORDER_ISSUE_NUMBER_DESC} from '../constants'
 import {comicDetailLoader} from './dataloaders/comicDetail'
 import {comicsLoader} from './dataloaders/comics'
-import {COMICS_ORDER_ISSUE_NUMBER_DESC} from '../constants'
+import {seriesDetailLoader} from './dataloaders/seriesDetail'
 import {characterDetailLoader} from './dataloaders/characterDetail'
 import {charactersLoader} from './dataloaders/characters'
 import {creatorDetailLoader} from './dataloaders/creatorDetail'
@@ -70,6 +71,13 @@ export const resolvers = {
       }
 
       return comicsLoader.load(JSON.stringify(keys))
+    },
+
+    series(
+      obj,
+      {id}
+    ) {
+      return seriesDetailLoader.load(id)
     },
 
     character(

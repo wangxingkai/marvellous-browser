@@ -10,8 +10,19 @@ type Comic {
   images: [String]
   hasImages: Boolean
   description: String
+  series: Series
   characters: [Character]
   creators: [Creator]
+}
+
+type Series {
+  id: Int!
+  title: String
+  description: String
+  thumbnail: String
+  hasImages: Boolean
+  comicsTotal: Int
+  comics: [Comic]
 }
 
 type Characters {
@@ -74,6 +85,8 @@ type Query {
     titleStartsWith: String,
     characterIds: [Int]
   ): [Comic]
+
+  series(id: Int!): Series
 
   character(id: Int!): Character
   characters(
