@@ -53,7 +53,8 @@ export const resolvers = {
         limit,
         orderBy = COMICS_ORDER_ISSUE_NUMBER_DESC,
         titleStartsWith = false,
-        characterIds = false
+        characterIds = false,
+        seriesIds = false
       }
     ) {
       const keys = {
@@ -68,6 +69,10 @@ export const resolvers = {
 
       if (characterIds && R.length(characterIds)) {
         keys.characters = R.join(',', characterIds)
+      }
+
+      if (seriesIds && R.length(seriesIds)) {
+        keys.series = R.join(',', seriesIds)
       }
 
       return comicsLoader.load(JSON.stringify(keys))

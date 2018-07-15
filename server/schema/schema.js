@@ -84,6 +84,7 @@ type Query {
     orderBy: String,
     titleStartsWith: String,
     characterIds: [Int]
+    seriesIds: [Int]
   ): [Comic]
 
   series(id: Int!): Series
