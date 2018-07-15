@@ -7,6 +7,6 @@ cd client
 yarn run lint:pcss
 cd ..
 
-eslint --ignore-path .eslintignore --config .eslintrc client/app/**/*.js client/app/**/*.jsx
+eslint --ignore-path .eslintignore --config .eslintrc "client/app/**/*.js" "client/app/**/*.jsx"
 
-eslint --ignore-path .eslintignore --config .eslintrc server/**/*.js server/*.js
+eslint --ignore-path .eslintignore --config .eslintrc "server/**/*.js" "server/*.js"
