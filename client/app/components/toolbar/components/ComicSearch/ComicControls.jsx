@@ -1,8 +1,7 @@
 import React from 'react'
 import '../SearchControls.pcss'
 import { updateComicsQuery } from '../../../comics/actions'
-import path from 'ramda/src/path'
-import compose from 'ramda/src/compose'
+import {path, compose} from 'ramda'
 import {
   COMICS_LOAD_MORE_LIMIT,
   COMICS_ORDER_ISSUE_NUMBER_DESC,

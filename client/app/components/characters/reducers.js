@@ -1,5 +1,4 @@
-import propOr from 'ramda/src/propOr'
-import pathOr from 'ramda/src/pathOr'
+import {propOr, pathOr} from 'ramda'
 import URLSearchParams from 'url-search-params'
 import {
   CHARACTERS_CHANGE_QUERY,

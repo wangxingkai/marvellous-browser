@@ -4,9 +4,7 @@ import './CreatorsTile.pcss'
 import {Link} from 'react-router'
 import classNames from 'classnames'
 import {getColourForKey} from '../../../random-colours'
-import ifElse from 'ramda/src/ifElse'
-import assoc from 'ramda/src/assoc'
-import prop from 'ramda/src/prop'
+import {ifElse, assoc, prop} from 'ramda'
 
 const styleForCreator = ifElse(
   prop('hasImages'),

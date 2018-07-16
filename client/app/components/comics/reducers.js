@@ -1,10 +1,4 @@
-import propOr from 'ramda/src/propOr'
-import pathOr from 'ramda/src/pathOr'
-import split from 'ramda/src/split'
-import defaultTo from 'ramda/src/defaultTo'
-import compose from 'ramda/src/compose'
-import remove from 'ramda/src/remove'
-import map from 'ramda/src/map'
+import {propOr, pathOr, split, defaultTo, compose, remove, map} from 'ramda'
 import URLSearchParams from 'url-search-params'
 import {
   COMICS_CHANGE_QUERY,

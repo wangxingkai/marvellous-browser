@@ -11,9 +11,7 @@ import {
 } from './constants'
 import {client} from '../../client'
 import {gql} from 'react-apollo'
-import merge from 'ramda/src/merge'
-import clone from 'ramda/src/clone'
-import compose from 'ramda/src/compose'
+import {merge, clone, compose} from 'ramda'
 import {browserHistory} from 'react-router'
 import {objectToQueryParams} from '../../helpers/objectToQueryParams'
 

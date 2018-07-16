@@ -1,8 +1,7 @@
 import React from 'react'
 import '../SearchControls.pcss'
 import { updateCharactersQuery } from '../../../characters/actions'
-import path from 'ramda/src/path'
-import compose from 'ramda/src/compose'
+import {path, compose} from 'ramda'
 import {
   CHARACTERS_LOAD_MORE_LIMIT,
   CHARACTERS_ORDER_NAME_ASC

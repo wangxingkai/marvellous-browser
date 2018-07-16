@@ -1,12 +1,9 @@
 import React from 'react'
 import CharactersTile from './CharactersTile.jsx'
-import pathOr from 'ramda/src/pathOr'
-import path from 'ramda/src/path'
+import {pathOr, path, compose, pick} from 'ramda'
 import './Characters.pcss'
 import { connect } from 'react-redux'
 import { loadMoreCharacters } from '../actions'
-import compose from 'ramda/src/compose'
-import pick from 'ramda/src/pick'
 import { Helmet } from 'react-helmet'
 import InfiniteScroll from 'react-infinite-scroller'
 import {

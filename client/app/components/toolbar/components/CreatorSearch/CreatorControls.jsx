@@ -1,8 +1,7 @@
 import React from 'react'
 import '../SearchControls.pcss'
 import { updateCreatorsQuery } from '../../../creators/actions'
-import path from 'ramda/src/path'
-import compose from 'ramda/src/compose'
+import {path, compose} from 'ramda'
 import {
   CREATORS_LOAD_MORE_LIMIT,
   CREATORS_ORDER_FIRSTNAME_ASC
