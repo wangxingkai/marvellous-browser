@@ -14,13 +14,13 @@ import {
 } from './constants'
 import {client} from '../../client'
 import {gql} from 'react-apollo'
-import {merge, remove, append, clone, map, compose, evolve} from 'ramda'
+import {merge, remove, append, clone, map, compose, evolve, ifElse, isNil, identity} from 'ramda'
 import {browserHistory} from 'react-router'
 import {objectToQueryParams} from '../../helpers/objectToQueryParams'
 
 const cleanComicsVariables = evolve({
-  characterIds: (characterIds) => characterIds && map((characterId) => characterId.id)(characterIds),
-  seriesIds: (seriesId) => seriesId && map((seriesId) => seriesId.id)(seriesId),
+  characterIds: ifElse(isNil, identity, map((characterId) => characterId.id)),
+  seriesIds: ifElse(isNil, identity, map((seriesId) => seriesId.id)),
 })
 
 const mergeQueryVariables = compose(cleanComicsVariables, merge({
